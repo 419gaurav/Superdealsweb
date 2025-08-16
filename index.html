@@ -3,43 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Affiliate Links</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
-      text-align: center;
-      padding: 30px;
-    }
-    .container {
-      max-width: 400px;
-      margin: auto;
-    }
-    .btn {
-      display: block;
-      margin: 15px 0;
-      padding: 15px;
-      background: #4CAF50;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 8px;
-    }
-    .btn:hover {
-      background: #45a049;
-    }
-  </style>
+  <title>Redirecting...</title>
+  <script>
+    window.onload = function () {
+      // Apne affiliate links yaha dal do
+      var links = [
+        "https://affiliate-link-1.com",
+        "https://affiliate-link-2.com",
+        "https://affiliate-link-3.com",
+        "https://affiliate-link-4.com"
+      ];
+
+      // Links ko shuffle karne ka function
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // Links shuffle ho jaye random order me
+      var shuffledLinks = shuffle(links);
+
+      // Recursive redirect function
+      function tryRedirect(index) {
+        if (index >= shuffledLinks.length) {
+          document.body.innerHTML = "<h2>All links failed. Please try again later.</h2>";
+          return;
+        }
+        var link = shuffledLinks[index];
+
+        // Ek hidden iframe banake check karenge ki load hota hai ya nahi
+        var iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        iframe.src = link;
+
+        iframe.onload = function () {
+          // Agar load ho gaya to redirect
+          window.location.href = link;
+        };
+
+        iframe.onerror = function () {
+          // Agar fail ho gaya to next link try karo
+          tryRedirect(index + 1);
+        };
+
+        document.body.appendChild(iframe);
+      }
+
+      // Start with first shuffled link
+      tryRedirect(0);
+    };
+  </script>
 </head>
 <body>
-  <div class="container">
-    <h2>🌍 My Affiliate Store</h2>
-    <a href="https://www.amazon.in/?tag=YOUR_AMAZON_ID" class="btn">🛒 Amazon</a>
-    <a href="https://flipkart.com?affid=YOUR_FLIPKART_ID" class="btn">📱 Flipkart</a>
-    <a href="https://ajio.com?affid=YOUR_AJIO_ID" class="btn">👕 AJIO</a>
-    <a href="https://myntra.com?affid=YOUR_MYNTRA_ID" class="btn">👗 Myntra</a>
-    <a href="https://your-cj-link.com" class="btn">🌎 CJ Affiliate</a>
-    <a href="https://your-awin-link.com" class="btn">🌐 AWIN</a>
-    <a href="https://your-impact-link.com" class="btn">💻 Impact</a>
-  </div>
+  <p>Redirecting to our best deals...</p>
 </body>
 </html>
