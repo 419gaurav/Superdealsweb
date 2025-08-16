@@ -1,63 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
-  <script>
-    window.onload = function () {
-      // Apne affiliate links yaha dal do
-      var links = [
-        "https://affiliate-link-1.com",
-        "https://affiliate-link-2.com",
-        "https://affiliate-link-3.com",
-        "https://affiliate-link-4.com"
-      ];
-
-      // Links ko shuffle karne ka function
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-      }
-
-      // Links shuffle ho jaye random order me
-      var shuffledLinks = shuffle(links);
-
-      // Recursive redirect function
-      function tryRedirect(index) {
-        if (index >= shuffledLinks.length) {
-          document.body.innerHTML = "<h2>All links failed. Please try again later.</h2>";
-          return;
-        }
-        var link = shuffledLinks[index];
-
-        // Ek hidden iframe banake check karenge ki load hota hai ya nahi
-        var iframe = document.createElement("iframe");
-        iframe.style.display = "none";
-        iframe.src = link;
-
-        iframe.onload = function () {
-          // Agar load ho gaya to redirect
-          window.location.href = link;
-        };
-
-        iframe.onerror = function () {
-          // Agar fail ho gaya to next link try karo
-          tryRedirect(index + 1);
-        };
-
-        document.body.appendChild(iframe);
-      }
-
-      // Start with first shuffled link
-      tryRedirect(0);
-    };
-  </script>
+    <meta charset="UTF-8">
+    <title>Super Deals</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <p>Redirecting to our best deals...</p>
+    <h1>Super Deals & Coupons</h1>
+    <p>Click any deal to get best discounts & apply coupons automatically!</p>
+
+    <div id="deals-container"></div>
+    <button id="open-app-btn">Open App & Apply Deals</button>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
