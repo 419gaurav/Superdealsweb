@@ -5,26 +5,30 @@ const deals = [
     {name: "App Download & Earn", link: "https://affiliate-link.com/app"}
 ];
 
+// Function to set cookie for 30 days
+function setAffiliateCookie() {
+    const days = 30;
+    const maxAge = days * 24 * 60 * 60; // seconds
+    document.cookie = `aff=YOURID; max-age=${maxAge}; path=/`;
+}
+
 // Display deals
 const container = document.getElementById('deals-container');
 deals.forEach(deal => {
     const btn = document.createElement('button');
     btn.innerText = deal.name;
     btn.onclick = () => {
-        // Set/update affiliate cookie for 24 hours
-        document.cookie = `aff=YOURID; max-age=${24*60*60}; path=/`;
-        window.open(deal.link, '_blank');
+        setAffiliateCookie(); // Set / refresh cookie
+        window.open(deal.link, '_blank'); // Open affiliate link
     };
     container.appendChild(btn);
 });
 
 // Open app button
 document.getElementById('open-app-btn').onclick = () => {
-    document.cookie = `aff=YOURID; max-age=${24*60*60}; path=/`;
+    setAffiliateCookie(); // Set / refresh cookie
     window.open("https://affiliate-link.com/app", "_blank");
 };
 
-// Auto cookie refresh every 24 hours
-setInterval(() => {
-    document.cookie = `aff=YOURID; max-age=${24*60*60}; path=/`;
-}, 24*60*60*1000);
+// Auto cookie refresh every time user opens page
+setAffiliateCookie();
